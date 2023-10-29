@@ -13,6 +13,7 @@ using TodoListClient.Services;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web.UI;
+using Microsoft.IdentityModel.Logging;
 
 namespace WebApp_OpenIDConnect_DotNet
 {
@@ -54,7 +55,7 @@ namespace WebApp_OpenIDConnect_DotNet
                     .RequireAuthenticatedUser()
                     .Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
-            }).AddMicrosoftIdentityUI();
+            }).AddRazorRuntimeCompilation().AddMicrosoftIdentityUI();
 
             services.AddRazorPages();
 
@@ -68,6 +69,7 @@ namespace WebApp_OpenIDConnect_DotNet
         {
             if (env.IsDevelopment())
             {
+                IdentityModelEventSource.ShowPII = true;
                 app.UseDeveloperExceptionPage();
             }
             else

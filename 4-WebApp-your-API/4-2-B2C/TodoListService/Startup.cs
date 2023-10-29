@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Web;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Logging;
 
 namespace TodoListService
 {
@@ -49,7 +50,7 @@ namespace TodoListService
                 // Since IdentityModel version 5.2.1 (or since Microsoft.AspNetCore.Authentication.JwtBearer version 2.2.0),
                 // PII hiding in log files is enabled by default for GDPR concerns.
                 // For debugging/development purposes, one can enable additional detail in exceptions by setting IdentityModelEventSource.ShowPII to true.
-                // Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
+                Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
                 app.UseDeveloperExceptionPage();
             }
             else
